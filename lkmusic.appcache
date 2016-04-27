@@ -1,0 +1,17 @@
+CACHE MANIFEST
+# lkmusic version 3
+CACHE:
+index.html
+js/lkmusic.js
+js/musicList.js
+static/css/smusic.css
+static/images/music_bg.jpg
+static/images/music_cover.jpg
+static/images/music_icons.png
+static/xihuanlianggeren.mp3
+static/xihuanlianggeren.lrc
+static/yuebanxiaoyequ.mp3
+static/yuebanxiaoyequ.lrc
+static/laopengyou.mp3
+static/laopengyou.lrc
+http://data.smohan.net/static/css/demo.css
