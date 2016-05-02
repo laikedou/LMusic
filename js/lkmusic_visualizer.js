@@ -252,6 +252,7 @@ var whenReady = (function(){
        this.Ajax = null;
        this.tmpEvents = [];
        this.init();//初始化播放器相关dom以及事件
+       this.isInit = false;
   }
   LMusic.prototype ={
     config:{
@@ -312,7 +313,11 @@ var whenReady = (function(){
      * @return    {[type]}                     [description]
      */
     resetPlayer:function(idx){
-
+    	 
+         var ctrl = this.musicDom.button.ctrl;
+         var ctrllist = new classList(ctrl);
+         ctrllist.remove('paused');
+         ctrllist.remove('play');
          (idx >= (this.musicLength-1)) && (idx = this.musicLength-1);
          (idx <=0) && (idx =0);
          var _this = this;
@@ -512,7 +517,10 @@ var whenReady = (function(){
          
          LkMusic.WebAudio.setVolume(target.config.defaultVolume);
          
-         target.action();
+         if(!target.isInit){
+         	target.action();
+         }
+         
          //开始进行音频频谱的绘制
          target.drawSpectrum(LkMusic.WebAudio.analyser);
     },
@@ -541,7 +549,7 @@ var whenReady = (function(){
 		  
 		    this.on('destroy', this.destroy);
 		  
-		    this.on('error', this.hideProgress);
+		    
 		  
 			LkMusic.WebAudio.on('finish', function () { 
 				_this.playByMode('ended');
@@ -665,6 +673,7 @@ var whenReady = (function(){
      * @return    {[type]}                 [description]
      */
     action:function(){
+    	 this.isInit = true;
          //这里为什么要用_this 这个要明白this在不同地方的指向不一样
          var _this = this,v = this.musicDom.volume,btn=this.musicDom.button;
          var enterFrame = function(){
